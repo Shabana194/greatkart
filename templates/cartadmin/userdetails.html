@@ -1,0 +1,92 @@
+{% extends 'cartadmin/baseadmin.html' %}
+
+{% load static %}
+
+{% block container %}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">username</th>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">email</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for list in user_list %}
+
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <th scope="row">{{list.username}}</th>
+        <td>{{list.first_name}}</td>
+        <td>{{list.last_name}}</td>
+        <td>{{list.email}}</td>
+        {% if list.is_active %}
+        <td><button class="btn btn-danger" onclick="block({{list.id}})"> Block </button></td>
+        {% else %}
+        <td><button class="btn btn-primary" onclick="unblock({{list.id}})"> UnBlock </button></td>
+        {% endif %}
+      </tr>
+        {% endfor %}
+        
+    </tbody>
+  </table>
+
+  <script>
+    function block(id){
+      swal({
+        title: "Are you sure?",
+        text: "Block User",
+        icon: "warning",
+        buttons: true,
+      })
+      .then((willDelete) => {
+        console.log(willDelete)
+        if (willDelete) {
+          swal("Blocked", {
+            icon: "success",
+            buttons: false,
+
+          });
+          console.log(true)
+          $.ajax({
+            type:'GET',
+            url : '/cartadmin/block/',
+            data : {
+              'id':id
+            },
+            success : function(response){
+              console.log(response.result)
+              location.href=""
+            }
+
+          })
+        }
+      });
+    }
+
+
+    function unblock(id){
+
+          console.log(true)
+          $.ajax({
+            type:'GET',
+            url : '/cartadmin/unblock/',
+            data : {
+              'id':id
+            },
+            success : function(response){
+              console.log(response.result)
+              location.href=""
+            }
+
+          })
+    }
+  </script>
+
+  {% endblock %}
+
+
+  {% block chart %}{% endblock chart %}

@@ -1,0 +1,72 @@
+{% extends 'cartadmin/baseadmin.html' %}
+
+{% load static %}
+
+
+{% block container %}
+<a href="{% url 'add_product' %}" class="btn btn-success "> Add Product </a>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">product_name</th>
+        <th scope="col">price</th>
+        <th scope="col">category</th>
+        <th scope="col">images</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for list in product_list %}
+      <tr>
+        <th scope="row">{{list.id}}</th>
+        <th scope="row">{{list.product_name}}</th>
+        <td>{{list.price}}</td>
+        <td>{{list.category}}</td>
+        <td><img src="{{list.images.url}}" width="60px"></td>
+        <td><a href="{% url 'edit_product' list.id %}" class="btn btn-warning"> Edit </a>&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-danger" onclick="delet({{list.id}})"> Delete </button></td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+
+
+  <script>
+
+      function delet(id){
+        swal({
+          title: "Are you sure?",
+          text: "Delete Product",
+          icon: "warning",
+          buttons: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("Delete", {
+              icon: "success",
+              buttons: false,
+  
+            });
+            console.log(true)
+            $.ajax({
+              type:'GET',
+              url : '/cartadmin/delete',
+              data : {
+                'id':id
+              },
+              success : function(response){
+                console.log(response.result)
+                location.href=""
+              }
+  
+            })
+          }
+        });
+      }
+  </script>
+
+  {% endblock container %}
+
+  {% block chart %}{% endblock chart %}

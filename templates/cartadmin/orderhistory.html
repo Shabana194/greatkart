@@ -1,0 +1,37 @@
+{% extends 'cartadmin/baseadmin.html' %}
+
+{% load static %}
+
+
+{% block container %}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">user</th>
+        <th scope="col">address_line_1</th>
+        <th scope="col">state</th>
+        <th scope="col">status</th>
+        <th scope="col">updated_at</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for list in orders %}
+      <tr>
+        <th scope="row">{{list.id}}</th>
+        <th scope="row">{{list.user}}</th>
+        <td>{{list.address_line_1}}</td>
+        <td>{{list.state}}</td>
+        <td>{{list.status}}</td>
+        <td>{{list.updated_at}}</td>
+
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+
+  {% endblock container %}
+
+  {% block chart %}{% endblock chart %}
