@@ -25,7 +25,7 @@ SECRET_KEY = '-e+_d_i)8*6lem-f5gh6+d)+9k*3a^^km$^i2-@3v34!@$!a@3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','43.207.36.134','localhost']
 
 
 # Application definition
@@ -86,20 +86,20 @@ AUTH_USER_MODEL='accounts.Account'
 DATABASES = {
 
 
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': 'mydatabase',
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+    }
 
 
 
-   'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'greatkart',
-        'USER':'root',
-        'PASSWORD':'mysql123',
-        'HOST':'127.0.0.1',
-   }
+#    'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'greatkart',
+#         'USER':'root',
+#         'PASSWORD':'mysql123',
+#         'HOST':'127.0.0.1',
+#    }
 
 }
 
