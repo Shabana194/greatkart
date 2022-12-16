@@ -112,7 +112,7 @@
 						</dl>
 						<dl class="dlist-align">
 							<dt>Grand Total:</dt>
-							<dd class="text-right text-dark b"><strong>$ {{grand_total}}</strong></dd>
+							<dd class="text-right text-dark b"><strong id="something">$ {{grand_total}}</strong></dd>
 						</dl>
 						<hr>
 						<p class="text-center mb-3">
@@ -139,6 +139,8 @@
 	</div> <!-- container .//  -->
 </section>
 <script>
+var grand_total = '{{grand_total}}'
+
 	function getCookie(name) {
 		let cookieValue = null;
 		if (document.cookie && document.cookie !== '') {
@@ -155,7 +157,8 @@
 		return cookieValue;
 	}
 	
-	var amount= "{{ grand_total }}"
+	var amount= grand_total
+	console.log(amount)
 	var url = "{% url 'payments' %}"
 	var csrftoken = getCookie('csrftoken');
 	var orderID = "{{order.order_number}}"
@@ -232,6 +235,7 @@
 				console.log(data.total)
 				console.log(document.getElementById('something'))
 				document.getElementById('something').innerText = data.total
+				grand_total = data.total
 
 			}
 		})
