@@ -1,0 +1,5 @@
+orderid = int()
+payment_method = str()
+amount_of_pay = int()
+order_number = int()
+total = int()

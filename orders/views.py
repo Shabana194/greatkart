@@ -11,16 +11,17 @@ from store.models import Product
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from accounts import otphelper
+from orders import codhelp
 
 
 
 def cash_on_delivery(request):
-    order = Order.objects.get(user=request.user, is_ordered=False, order_number=otphelper.order_number)
+    order = Order.objects.get(user=request.user, is_ordered=False, order_number=codhelp.order_number)
     payment_update = Payment(
         user = request.user,
         payment_id = 'Not Applicable' ,
-        payment_method = otphelper.payment_method,
-        amount_paid = otphelper.amount_of_pay,
+        payment_method = codhelp.payment_method,
+        amount_paid = codhelp.amount_of_pay,
         status = "Pending"
     )
     payment_update.save()
@@ -69,7 +70,7 @@ def cash_on_delivery(request):
             'order_number': order.order_number,
             'subtotal': subtotal,
             'payment_update':payment_update,
-            'total':otphelper.total,
+            'total':codhelp.total,
         }
 
     return render(request, 'orders/order_complete.html', context)
@@ -178,8 +179,8 @@ def place_order(request,total=0,quantity=0):
             d = datetime.date(yr,mt,dt)
             current_date = d.strftime("%Y%m%d") #20210305
             order_number = current_date + str(data.id)#concatenating order id with current_date
-            data.order_number = otphelper.order_number = order_number
-            data.payment_option = otphelper.payment_method = form.cleaned_data['payment_option']
+            data.order_number = codhelp.order_number = order_number
+            data.payment_option = codhelp.payment_method = form.cleaned_data['payment_option']
             data.save()
 
             order = Order.objects.get(user=current_user, is_ordered=False, order_number=order_number)
