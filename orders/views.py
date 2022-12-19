@@ -16,7 +16,7 @@ from orders import codhelp
 
 
 def cash_on_delivery(request):
-    order = Order.objects.get(user=request.user, is_ordered=False, order_number=codhelp.order_number)
+    order = Order.objects.get(user=request.user, is_ordered=False, order_number=request.session['order_number'])
     payment_update = Payment(
         user = request.user,
         payment_id = 'Not Applicable' ,
@@ -180,6 +180,7 @@ def place_order(request,total=0,quantity=0):
             current_date = d.strftime("%Y%m%d") #20210305
             order_number = current_date + str(data.id)#concatenating order id with current_date
             data.order_number = codhelp.order_number = order_number
+            request.session['order_number'] = data.order_number
             data.payment_option = codhelp.payment_method = form.cleaned_data['payment_option']
             data.save()
 

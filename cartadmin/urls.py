@@ -15,6 +15,7 @@ urlpatterns = [
     path('edit<id>/',edit_product,name='edit_product'),
     path('delete',delete_product,name='delete_product'),
     path('history/',order_history,name='order_history'),
+    path('sales_report',admin_sales_report,name='sales_report'),
     path('logout/',admin_logout,name='admin_logout'),
     
     

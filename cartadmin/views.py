@@ -47,6 +47,9 @@ def user_details(request):
     user_list = Account.objects.all()
     return render(request,'cartadmin/userdetails.html',{'user_list':user_list})
 
+def admin_sales_report(request):
+    return render(request,'cartadmin/salesreport.html')
+
 
 
 
