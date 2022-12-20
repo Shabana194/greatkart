@@ -48,7 +48,24 @@ def user_details(request):
     return render(request,'cartadmin/userdetails.html',{'user_list':user_list})
 
 def admin_sales_report(request):
-    return render(request,'cartadmin/salesreport.html')
+    order = Order.objects.all()
+    total_order = len(order)
+    total_cashon_delivery = 0
+    total_online_payment = 0
+    for x in order:
+        if x.payment_option == 'PAYPAL':
+            total_online_payment += 1
+        else:
+            total_cashon_delivery += 1
+    
+    print(f"len {total_order}, paypal {total_online_payment}, cash on delivery {total_cashon_delivery}")
+    context = {
+        'total_order' : total_order,
+        'total_online_payment' : total_online_payment,
+        'total_cashon_delivery' : total_cashon_delivery
+    }
+
+    return render(request,'cartadmin/salesreport.html',context)
 
 
 

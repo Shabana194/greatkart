@@ -8,26 +8,16 @@
 <table class="table" id="pagination">
     <thead>
       <tr>
-        <th scope="col">id</th>
-        <th scope="col">user</th>
-        <th scope="col">address_line_1</th>
-        <th scope="col">state</th>
-        <th scope="col">status</th>
-        <th scope="col">updated_at</th>
+        <th scope="col">total Orders : {{total_order}}</th>
       </tr>
     </thead>
     <tbody>
-        {% for list in orders %}
       <tr>
-        <th scope="row">{{list.id}}</th>
-        <th scope="row">{{list.user}}</th>
-        <td>{{list.address_line_1}}</td>
-        <td>{{list.state}}</td>
-        <td>{{list.status}}</td>
-        <td>{{list.updated_at}}</td>
-
+        <th scope="col">total cashon delivery : {{total_online_payment}}</th>
       </tr>
-        {% endfor %}
+      <tr>
+        <th scope="col">total paypal : {{total_cashon_delivery}}</th>
+      </tr>
     </tbody>
   </table>
 
